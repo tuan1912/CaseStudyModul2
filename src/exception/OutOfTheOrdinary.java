@@ -1,13 +1,13 @@
 package exception;
 
-public class TooLong extends Exception{
+public class OutOfTheOrdinary extends Exception{
     String errorMessage;
-    public TooLong(String errorMessage){
+    public OutOfTheOrdinary(String errorMessage){
         this.errorMessage = errorMessage;
     }
 
     public String getErrorMessage() {
-        System.out.println(errorMessage);
+        System.err.println(errorMessage);
         return errorMessage;
     }
 

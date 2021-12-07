@@ -8,7 +8,7 @@ public class Main {
     ComputerView computerView = new ComputerView();
     ConsumerView consumerView = new ConsumerView();
     public void goAdministratorMenu(){
-        showAdminitratorMenu();
+        showAdministratorMenu();
         switch (ValidateView.chooseAdminMenu()){
             case 1:
                 computerView.showComputers();
@@ -20,9 +20,11 @@ public class Main {
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 3:
+                computerView.changeComputerName();
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 4:
+                computerView.removeComputer();
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 5:
@@ -51,7 +53,7 @@ public class Main {
         System.exit(0);
     }
 
-    private void showAdminitratorMenu() {
+    private void showAdministratorMenu() {
         System.out.println("--$$$----CYBER GAME MANAGEMENTS----$$$--");
         System.out.println("  1.  Show computers                   ");
         System.out.println("  2.  Create new computer              ");
@@ -62,7 +64,7 @@ public class Main {
         System.out.println("  7.  Charge                           ");
         System.out.println("  8.  Manage consumer accounts         ");
         System.out.println("  9.  Show revenue                     ");
-        System.out.println("  0.  Exit                     ");
+        System.out.println("  0.  Exit                             ");
         System.out.println("              ---(^_^)---             ");
     }
 
