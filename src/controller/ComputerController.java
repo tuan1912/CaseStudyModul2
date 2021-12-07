@@ -1,9 +1,15 @@
 package controller;
 
+import model.Computer;
 import service.ComputerServiceImpl;
+
+import java.util.List;
 
 public class ComputerController {
     ComputerServiceImpl computerService = new ComputerServiceImpl();
+    public List<Computer> findAll(){
+        return computerService.findAll();
+    }
     public void createNewComputer() {
         computerService.createNewComputer();
     }

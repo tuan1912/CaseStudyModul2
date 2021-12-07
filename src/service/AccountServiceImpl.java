@@ -11,7 +11,7 @@ public class AccountServiceImpl implements IAccountService {
 
     static ConfigReadAndWrite<Account> configReadAndWrite = new ConfigReadAndWrite<>();
     public static List<Account> accounts = configReadAndWrite.readFromFile(Path.PATH_ACCOUNTS);
-
+    ConsumerServiceImpl consumerService = new ConsumerServiceImpl();
     public AccountServiceImpl() {
         try {
             if (!accounts.isEmpty()) {
@@ -54,21 +54,28 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public void changeAccountPassword(int index, String password) {
         accounts.get(index).setPassword(password);
+        writeToFile();
     }
 
     @Override
     public void changeAccountRole(int index, int role) {
         accounts.get(index).setRole_BasedAuthorization(role);
+        writeToFile();
     }
 
     @Override
-    public void changeAccountInformation(int index, Consumer consumer) {
-        accounts.get(index).setConsumerDetails(consumer);
+    public void changeAccountInformation(int index, String name, String dateOfBirth, String phoneNumber) {
+        accounts.get(index).getConsumerDetails().setName(name);
+        accounts.get(index).getConsumerDetails().setDateOfBirth(dateOfBirth);
+        accounts.get(index).getConsumerDetails().setPhoneNumber(phoneNumber);
+        consumerService.changeConsumerInformation(index,name,dateOfBirth,phoneNumber);
+        writeToFile();
     }
 
     @Override
     public void removeAccount(int index) {
         accounts.remove(index);
+        writeToFile();
     }
 
 

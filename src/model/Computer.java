@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Computer {
+public class Computer implements Serializable {
     public static int id = 0;
     private int computerId;
     private String computerName = "Computer ";
@@ -58,9 +59,10 @@ public class Computer {
         return "Computer{" +
                 "computerId=" + computerId +
                 ", computerName='" + computerName + '\'' +
-                ", status=" + status +
+                ", status=" + (status?"Available":"Disable") +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 '}';
     }
+
 }

@@ -10,20 +10,22 @@ public class ConsumerServiceImpl implements IConsumerService {
     public static final int NOT_EXIST_ID = -1;
     static ConfigReadAndWrite<Consumer> configReadAndWrite = new ConfigReadAndWrite<>();
     static List<Consumer> consumers = configReadAndWrite.readFromFile(Path.PATH_CONSUMERS);
-    public ConsumerServiceImpl(){
+
+    public ConsumerServiceImpl() {
         try {
-            if(!consumers.isEmpty())
-            {
+            if (!consumers.isEmpty()) {
                 int maxConsumerId = 0;
                 for (int i = 0; i < consumers.size(); i++) {
-                    if(consumers.get(i).getConsumerId()> maxConsumerId) maxConsumerId = consumers.get(i).getConsumerId();
+                    if (consumers.get(i).getConsumerId() > maxConsumerId)
+                        maxConsumerId = consumers.get(i).getConsumerId();
                 }
                 Consumer.id = maxConsumerId;
             }
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public List<Consumer> findAll() {
         return consumers;
@@ -31,12 +33,12 @@ public class ConsumerServiceImpl implements IConsumerService {
 
     @Override
     public void writeToFile() {
-        configReadAndWrite.writeToFile(Path.PATH_CONSUMERS,consumers);
+        configReadAndWrite.writeToFile(Path.PATH_CONSUMERS, consumers);
     }
 
     @Override
     public void createNewConsumer(String name, String dateOfBirth, String phoneNumber) {
-        consumers.add(new Consumer(name,dateOfBirth,phoneNumber));
+        consumers.add(new Consumer(name, dateOfBirth, phoneNumber));
         writeToFile();
     }
 
@@ -44,7 +46,7 @@ public class ConsumerServiceImpl implements IConsumerService {
     public int getIndexByConsumerId(int consumerId) {
         for (int i = 0; i < consumers.size(); i++) {
             boolean isConsumerId = consumerId == consumers.get(i).getConsumerId();
-            if (isConsumerId)return i;
+            if (isConsumerId) return i;
         }
         return NOT_EXIST_ID;
     }
@@ -62,6 +64,7 @@ public class ConsumerServiceImpl implements IConsumerService {
         consumers.remove(index);
         writeToFile();
     }
+
 
 
 }

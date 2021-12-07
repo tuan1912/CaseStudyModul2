@@ -12,7 +12,7 @@ public interface IAccountService {
     int getIndexByAccountId(int accountId);
     void changeAccountPassword(int index,String password);
     void changeAccountRole(int index, int role);
-    void changeAccountInformation(int index, Consumer consumer);
+    void changeAccountInformation(int index, String name, String dateOfBirth, String phoneNumber);
     void removeAccount(int index);
 
 }

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Consumer {
+public class Consumer implements Serializable {
     public static int id=0;
     private int consumerId;
     private String name;

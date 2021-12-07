@@ -1,7 +1,57 @@
 package view;
 
+import java.util.Scanner;
+
 public class Main {
-    public void goAdminítratorMenu(){
+    Scanner scanner = new Scanner(System.in);
+    AccountView accountView = new AccountView();
+    ComputerView computerView = new ComputerView();
+    ConsumerView consumerView = new ConsumerView();
+    public void goAdministratorMenu(){
+        showAdminitratorMenu();
+        switch (ValidateView.chooseAdminMenu()){
+            case 1:
+                computerView.showComputers();
+                computerView.showComputerDetails();
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 2:
+                computerView.createNewComputer();
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 3:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 4:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 5:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 6:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 7:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+
+            case 8:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 9:
+                ValidateView.goAdminMenuOrQuit();
+                break;
+            case 0:
+                exit();
+                break;
+        }
+    }
+
+    private void exit() {
+        System.exit(0);
+    }
+
+    private void showAdminitratorMenu() {
         System.out.println("--$$$----CYBER GAME MANAGEMENTS----$$$--");
         System.out.println("  1.  Show computers                   ");
         System.out.println("  2.  Create new computer              ");
@@ -12,12 +62,12 @@ public class Main {
         System.out.println("  7.  Charge                           ");
         System.out.println("  8.  Manage consumer accounts         ");
         System.out.println("  9.  Show revenue                     ");
+        System.out.println("  0.  Exit                     ");
         System.out.println("              ---(^_^)---             ");
-
     }
 
     public static void main(String[] args) {
-        new Main().goAdminítratorMenu();
+        new Main().goAdministratorMenu();
     }
 
 

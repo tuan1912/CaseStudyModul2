@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Account {
+public class Account implements Serializable {
     Scanner scanner = new Scanner(System.in);
     static final int ROLE_ADMINISTRATOR = 0, ROLE_MANAGER = 1, ROLE_CONSUMER = 9;
     public static int id = 0;
@@ -65,4 +66,6 @@ public class Account {
                 ", consumerDetails=" + consumerDetails +
                 '}';
     }
+
+
 }
