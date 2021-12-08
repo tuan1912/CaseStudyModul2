@@ -1,16 +1,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Scanner;
-
 public class Account implements Serializable {
-    Scanner scanner = new Scanner(System.in);
     static final int ROLE_ADMINISTRATOR = 0, ROLE_MANAGER = 1, ROLE_CONSUMER = 9;
     public static int id = 0;
     private int accountId;
     private String username;
     private String password;
-    private int role_BasedAuthorization;
+    private int role_BasedAuthorization = ROLE_CONSUMER;
     private Consumer consumerDetails;
 
     public Account() {
@@ -21,6 +18,7 @@ public class Account implements Serializable {
         accountId = ++id;
         this.username = username;
         this.password = password;
+        this.role_BasedAuthorization = role;
         this.consumerDetails = consumerDetails;
     }
 

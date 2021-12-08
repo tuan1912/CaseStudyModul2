@@ -1,5 +1,8 @@
 package view;
 
+import model.Account;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,9 +10,10 @@ public class Main {
     AccountView accountView = new AccountView();
     ComputerView computerView = new ComputerView();
     ConsumerView consumerView = new ConsumerView();
-    public void goAdministratorMenu(){
+
+    public void goAdministratorMenu() {
         showAdministratorMenu();
-        switch (ValidateView.chooseAdminMenu()){
+        switch (ValidateView.chooseAdminMenu()) {
             case 1:
                 computerView.showComputers();
                 computerView.showComputerDetails();
@@ -38,6 +42,7 @@ public class Main {
                 break;
 
             case 8:
+                accountView.goManageAccountMenu();
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 9:
@@ -62,19 +67,50 @@ public class Main {
         System.out.println("  5.  Additional service               ");
         System.out.println("  6.  Surcharge                        ");
         System.out.println("  7.  Charge                           ");
-        System.out.println("  8.  Manage consumer accounts         ");
+        System.out.println("  8.  Manage accounts                  ");
         System.out.println("  9.  Show revenue                     ");
         System.out.println("  0.  Exit                             ");
         System.out.println("              ---(^_^)---             ");
     }
 
-    public static void main(String[] args) {
-        new Main().goAdministratorMenu();
+    public void login() {
+        System.out.println("        *******LOGIN*******");
+        System.out.println("             Username:      ");
+        System.out.println("             Password:      ");
+        System.out.println("           ---(^_^)---");
+        String userName = ValidateView.enterAccountUserName();
+        String password = ValidateView.enterAccountPassword();
+        List<Account> accounts = accountView.accountController.findAll();
+        for (int i = 0; i < accounts.size(); i++) {
+            boolean isAccount = userName.equals(accounts.get(i).getUsername()) && password.equals(accounts.get(i).getPassword()) | userName.equals("nguyentuan") && password.equals("Tuan1992");
+            if (isAccount) {
+                boolean isAdministrator = accounts.get(i).getRole_BasedAuthorization() == 0;
+                if (isAdministrator | userName.equals("nguyentuan")) {
+                    new Main().goAdministratorMenu();
+                } else {
+                    boolean isManager = accounts.get(i).getRole_BasedAuthorization() == 1;
+                    if (isManager) {
+                        new Main().goManagerMenu();
+                    } else new Main().goConsumerMenu();
+                }
+
+            } else {
+                System.err.println("Wrong!Re-type:");
+                login();
+            }
+        }
+
+    }
+    public void goManagerMenu(){
+        System.out.println("HOhohohohohoh");
+    }
+    public void goConsumerMenu(){
+        System.out.println("hihihihihihihihih");
     }
 
-
-
-
+    public static void main(String[] args) {
+        new Main().login();
+    }
 
 
 }

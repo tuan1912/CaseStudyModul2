@@ -51,17 +51,17 @@ public class ComputerView {
             System.out.println("Enter new computer name:");
             String inputName = ValidateView.enterComputerName();
             computerController.changeComputerName(indexOfInputId, inputName);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Computers is null!");
         }
     }
 
-    public void removeComputer(){
+    public void removeComputer() {
         try {
-            System.out.println(" Enter computer id you wanna remove:" );
+            System.out.println(" Enter computer id you wanna remove:");
             int indexOfInputId = chooseComputer();
             computerController.removeComputer(indexOfInputId);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Computers is null!");
         }
     }

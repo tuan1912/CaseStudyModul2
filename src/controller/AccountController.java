@@ -23,8 +23,8 @@ public class AccountController {
     public void changeAccountRole(int index, int role) {
         accountService.changeAccountRole(index,role);
     }
-    public void changeAccountInformation(int index, Consumer consumer) {
-
+    public void changeAccountInformation(int index, String name, String dateOfBirth, String phoneNumber) {
+        accountService.changeAccountInformation(index,name,dateOfBirth,phoneNumber);
     }
     public void removeAccount(int index) {
         accountService.removeAccount(index);

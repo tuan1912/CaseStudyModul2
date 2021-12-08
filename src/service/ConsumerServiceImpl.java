@@ -37,9 +37,11 @@ public class ConsumerServiceImpl implements IConsumerService {
     }
 
     @Override
-    public void createNewConsumer(String name, String dateOfBirth, String phoneNumber) {
-        consumers.add(new Consumer(name, dateOfBirth, phoneNumber));
+    public Consumer createNewConsumer(String name, String dateOfBirth, String phoneNumber) {
+        Consumer csm = new Consumer(name, dateOfBirth, phoneNumber);
+        consumers.add(csm);
         writeToFile();
+        return csm;
     }
 
     @Override

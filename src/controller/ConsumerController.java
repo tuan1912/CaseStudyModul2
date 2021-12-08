@@ -11,8 +11,9 @@ public class ConsumerController {
         return consumerService.findAll();
     }
 
-    public void createNewConsumer(String name, String dateOfBirth, String phoneNumber) {
-        consumerService.createNewConsumer(name, dateOfBirth, phoneNumber);
+    public Consumer createNewConsumer(String name, String dateOfBirth, String phoneNumber) {
+        return consumerService.createNewConsumer(name, dateOfBirth, phoneNumber);
+
     }
 
     public int getIndexByConsumerId(int consumerId) {

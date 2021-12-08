@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class ValidateView {
     public static Scanner scanner = new Scanner(System.in);
+
     public static void goAdminMenuOrQuit() {
         System.out.println("Enter 'quit' or anyone else ");
         String nextChoice = scanner.nextLine();
@@ -24,8 +25,18 @@ public class ValidateView {
         boolean isChoiceNumber = choiceNumber < 10 && choiceNumber >= 0;
         if (isChoiceNumber) return choiceNumber;
         else {
-            System.err.println("Wrong! Re-type your choice ,again:");
+            System.err.println("Wrong! Re-type your choice :");
             return chooseAdminMenu();
+        }
+    }
+
+    public static int chooseManageAccountsMenu() {
+        int choiceNumber = enterIntegerNumber();
+        boolean isChoiceNumber = choiceNumber < 7 && choiceNumber > 0;
+        if (isChoiceNumber) return choiceNumber;
+        else {
+            System.err.println("Wrong! Re-type your choice ,again:");
+            return chooseManageAccountsMenu();
         }
     }
 
@@ -51,7 +62,8 @@ public class ValidateView {
             boolean match = matcher.matches();
             if (match) {
                 return computerName;
-            } else throw new OutOfTheOrdinary("That's out of the ordinary!\n"+"Use 2 - 10 characters with a mix of letters, numbers \n");
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Use 2 - 10 characters with a mix of letters, numbers \n");
         } catch (OutOfTheOrdinary e) {
             e.getErrorMessage();
             System.out.println(" Re-type : ");
@@ -59,8 +71,108 @@ public class ValidateView {
         }
     }
 
+    public static String enterAccountUserName() {
+        String accountUserName;
+        String regex = Regex.accountUsername;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            accountUserName = scanner.nextLine();
+            Matcher matcher = pattern.matcher(accountUserName);
+            boolean match = matcher.matches();
+            if (match) {
+                return accountUserName;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Use 8 - 12 characters with a mix of letters, numbers \n");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return enterAccountUserName();
+        }
+    }
 
+    public static String enterAccountPassword() {
+        String accountPassword;
+        String regex = Regex.accountPassword;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            accountPassword = scanner.nextLine();
+            Matcher matcher = pattern.matcher(accountPassword);
+            boolean match = matcher.matches();
+            if (match) {
+                return accountPassword;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return enterAccountPassword();
+        }
+    }
 
+    public static String enterConsumerName() {
+        String consumerName;
+        String regex = Regex.consumerName;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            consumerName = scanner.nextLine();
+            Matcher matcher = pattern.matcher(consumerName);
+            boolean match = matcher.matches();
+            if (match) {
+                return consumerName;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Use 2 - 20 characters with a mix of letters, numbers ");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return enterConsumerName();
+        }
+    }
+
+    public static String enterConsumerPhoneNumber() {
+        String consumerPhoneNumber;
+        String regex = Regex.consumerPhoneNumber;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            consumerPhoneNumber = scanner.nextLine();
+            Matcher matcher = pattern.matcher(consumerPhoneNumber);
+            boolean match = matcher.matches();
+            if (match) {
+                return consumerPhoneNumber;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Use 10 characters of numbers ");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return enterConsumerPhoneNumber();
+        }
+    }
+
+    public static String enterConsumerDateOfBirth() {
+        String consumerDateOfBirth;
+        String regex = Regex.consumerDateOfBirth;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            consumerDateOfBirth = scanner.nextLine();
+            Matcher matcher = pattern.matcher(consumerDateOfBirth);
+            boolean match = matcher.matches();
+            if (match) {
+                return consumerDateOfBirth;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "dd/mm/yyyy ");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return enterConsumerDateOfBirth();
+        }
+    }
+
+    public static int enterRole() {
+        int role = enterIntegerNumber();
+        if (role != 1 && role != 0 && role != 9) {
+            System.err.println("wrong role!");
+            return enterRole();
+        } else return role;
+    }
 
 
 }
