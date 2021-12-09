@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class AdditionalService implements Serializable {
     public static int id=0;
+    private int serviceId;
     private String name;
     private int price;
-    private int quantity;
-    public AdditionalService(String name, int price, int quantity){
+    public AdditionalService(String name, int price){
+        this.serviceId = ++id;
         this.name = name;
         this.price = price;
-        this.quantity= quantity;
     }
 
     public String getName() {
@@ -29,20 +29,21 @@ public class AdditionalService implements Serializable {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+
+
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+
+
 
     @Override
     public String toString() {
         return "AdditionalService{" +
-                "name='" + name + '\'' +
+                "serviceId=" + serviceId +
+                ", name='" + name + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

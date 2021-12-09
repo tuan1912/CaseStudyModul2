@@ -65,6 +65,21 @@ public class ComputerView {
             System.err.println("Computers is null!");
         }
     }
+    public void goChargeMenu(){
+        showComputers();
+        System.out.println("1. Turn On/Off Computer");
+        switch (ValidateView.chooseChargeMenu()){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+    public void turnOnOrOff(){
+        System.out.println();
+    }
 
 
 }

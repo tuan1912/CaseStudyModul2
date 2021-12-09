@@ -19,7 +19,8 @@ public class AccountView {
         System.out.println("   3. Remove account                ");
         System.out.println("   4. Change account password       ");
         System.out.println("   5. Change account information    ");
-        System.out.println("   6. Go back Administrator Menu    ");
+        System.out.println("   6. Change role                   ");
+        System.out.println("   7. Go back Administrator Menu    ");
         System.out.println("             ---(^_^)---            ");
         switch (ValidateView.chooseManageAccountsMenu()) {
             case 1:
@@ -43,6 +44,9 @@ public class AccountView {
                 goManageAccountMenu();
                 break;
             case 6:
+                changeRole();
+                break;
+            case 7:
                 break;
         }
     }
@@ -107,6 +111,13 @@ public class AccountView {
             accountController.changeAccountInformation(chooseAccountId, name, dateOfBirth, phoneNumber);
         } else System.err.println("Doesn't exist id!");
     }
+    public void changeRole(){
+        System.out.println("Enter account id you wanna change:");
+        int chooseAccountId = chooseAccount();
+        if (chooseAccountId > -1) {
+            System.out.println("Enter new role:");
+
+        }
 
 
 }

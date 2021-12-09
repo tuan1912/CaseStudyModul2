@@ -1,6 +1,8 @@
 package view;
 
+import controller.AccountController;
 import exception.OutOfTheOrdinary;
+import model.Account;
 import regex.Regex;
 
 import java.util.Scanner;
@@ -9,6 +11,7 @@ import java.util.regex.Pattern;
 
 public class ValidateView {
     public static Scanner scanner = new Scanner(System.in);
+    static AccountController accountController = new AccountController();
 
     public static void goAdminMenuOrQuit() {
         System.out.println("Enter 'quit' or anyone else ");
@@ -27,6 +30,16 @@ public class ValidateView {
         else {
             System.err.println("Wrong! Re-type your choice :");
             return chooseAdminMenu();
+        }
+    }
+
+    public static int chooseChargeMenu() {
+        int choiceNumber = enterIntegerNumber();
+        boolean isChoiceNumber = choiceNumber < 2 && choiceNumber > 0;
+        if (isChoiceNumber) return choiceNumber;
+        else {
+            System.err.println("Wrong! Re-type your choice :");
+            return chooseChargeMenu();
         }
     }
 
@@ -77,6 +90,12 @@ public class ValidateView {
         Pattern pattern = Pattern.compile(regex);
         try {
             accountUserName = scanner.nextLine();
+            for (Account acc : accountController.findAll()) {
+                if (accountUserName.equalsIgnoreCase(acc.getUsername())) {
+                    System.err.println("Duplicate accounts aren’t allowed. Re-type:");
+                    return enterAccountUserName();
+                }
+            }
             Matcher matcher = pattern.matcher(accountUserName);
             boolean match = matcher.matches();
             if (match) {
@@ -88,6 +107,26 @@ public class ValidateView {
             System.out.println(" Re-type : ");
             return enterAccountUserName();
         }
+    }
+
+    public static String loginUserName() {
+        String accountUserName;
+        String regex = Regex.accountUsername;
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            accountUserName = scanner.nextLine();
+            Matcher matcher = pattern.matcher(accountUserName);
+            boolean match = matcher.matches();
+            if (match) {
+                return accountUserName;
+            } else
+                throw new OutOfTheOrdinary("That's out of the ordinary!\n" + "Use 8 - 12 characters with a mix of letters, numbers \n");
+        } catch (OutOfTheOrdinary e) {
+            e.getErrorMessage();
+            System.out.println(" Re-type : ");
+            return loginUserName();
+        }
+
     }
 
     public static String enterAccountPassword() {
@@ -172,6 +211,27 @@ public class ValidateView {
             System.err.println("wrong role!");
             return enterRole();
         } else return role;
+    }
+
+
+    public static int enterAdditionalServicePrice() {
+        int additionalPrice = enterIntegerNumber();
+        if (additionalPrice > 0) {
+            return additionalPrice;
+        } else {
+            System.err.println("Not A Positive Integer\n Re-type:");
+            return enterAdditionalServicePrice();
+        }
+    }
+
+    public static int chooseAdditionalServiceMenu() {
+        int choiceNumber = enterIntegerNumber();
+        boolean isChoiceNumber = choiceNumber < 6 && choiceNumber > 0;
+        if (isChoiceNumber) return choiceNumber;
+        else {
+            System.err.println("Wrong! Re-type your choice ,again:");
+            return chooseAdditionalServiceMenu();
+        }
     }
 
 
