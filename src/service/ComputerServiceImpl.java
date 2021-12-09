@@ -34,6 +34,18 @@ public class ComputerServiceImpl implements IComputerService{
     }
 
     @Override
+    public void turnOff(int index) {
+        computers.get(index).turnComputerOff();
+        writeToFile();
+    }
+
+    @Override
+    public void isOnOrOff(int index) {
+        computers.get(index).isOnOrOff();
+        writeToFile();
+    }
+
+    @Override
     public void createNewComputer() {
         computers.add(new Computer());
         writeToFile();

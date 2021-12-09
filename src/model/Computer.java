@@ -20,6 +20,10 @@ public class Computer implements Serializable {
         return status;
     }
 
+    public void turnComputerOff() {
+        this.status = false;
+    }
+
     public void isOnOrOff() {
         this.status = !this.status; // phai check status nhap vao
         if (status) startCounter();

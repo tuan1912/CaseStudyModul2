@@ -1,6 +1,7 @@
 package view;
 
 import controller.ComputerController;
+import model.Computer;
 
 import java.util.Scanner;
 
@@ -65,20 +66,74 @@ public class ComputerView {
             System.err.println("Computers is null!");
         }
     }
-    public void goChargeMenu(){
-        showComputers();
+
+    public void goChargeMenu() {
         System.out.println("1. Turn On/Off Computer");
-        switch (ValidateView.chooseChargeMenu()){
+        System.out.println("2. Check               ");
+        System.out.println("3. Go back Administrator Menu");
+        switch (chooseChargeMenu()) {
             case 1:
+                turnOnOrOff();
+                goChargeMenu();
                 break;
             case 2:
+                getCheck();
+                goChargeMenu();
                 break;
             case 3:
                 break;
         }
     }
-    public void turnOnOrOff(){
-        System.out.println();
+    public  int enterIntegerNumber() {
+        int inputNumber;
+        try {
+            inputNumber = Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            System.err.println("Oops! Must be \"integer\"\n");
+            System.out.println("Re-type:");
+            return enterIntegerNumber();
+        }
+        return inputNumber;
+    }
+
+    public int chooseChargeMenu() {
+        int choiceNumber = enterIntegerNumber();
+        boolean isChoiceNumber = choiceNumber < 4 && choiceNumber > 0;
+        if (isChoiceNumber) return choiceNumber;
+        else {
+            System.err.println("Wrong! Re-type your choice :");
+            return chooseChargeMenu();
+        }
+    }
+
+    public void turnOnOrOff() {
+        showComputers();
+        System.out.println("Enter computer id:");
+        int indexOfInputId = chooseComputer();
+        if (indexOfInputId > -1) {
+            Computer com = computerController.findAll().get(indexOfInputId);
+            System.out.println(com);
+            computerController.isOnOrOff(indexOfInputId);
+            System.out.println((com.getStatus()) ? com.getComputerName() + " is Availabe" : com.getComputerName() + " is Disable");
+        } else {
+            System.err.println("Does'nt exist id! ");
+        }
+    }
+    public void getCheck(){
+        showComputers();
+        System.out.println("Enter computer id:");
+        int indexOfInputId = chooseComputer();
+        if (indexOfInputId > -1) {
+            Computer com = computerController.findAll().get(indexOfInputId);
+            try {
+                long check =  (com.getElapsedTime()*5/1000);
+                if(check>0)System.out.println(com.getComputerName()+" check = "+check+ "VND");
+                else System.err.println("Please turn the computer \"OFF\" before get the bill!");
+            }catch (Exception e){
+                System.out.println("Something must have went wrong!");
+            }
+
+        }else System.err.println("Doesn't exist id!");
     }
 
 

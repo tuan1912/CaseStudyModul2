@@ -11,6 +11,7 @@ public class AccountView {
     AccountController accountController = new AccountController();
     ConsumerController consumerController = new ConsumerController();
     ConsumerView consumerView = new ConsumerView();
+    ValidateView validateView = new ValidateView();
 
     void goManageAccountMenu() {
         System.out.println("---$$$--Manage Accounts Menu--$$$---");
@@ -22,7 +23,7 @@ public class AccountView {
         System.out.println("   6. Change role                   ");
         System.out.println("   7. Go back Administrator Menu    ");
         System.out.println("             ---(^_^)---            ");
-        switch (ValidateView.chooseManageAccountsMenu()) {
+        switch (validateView.chooseManageAccountsMenu()) {
             case 1:
                 showAccounts();
                 goManageAccountMenu();
@@ -45,6 +46,7 @@ public class AccountView {
                 break;
             case 6:
                 changeRole();
+                goManageAccountMenu();
                 break;
             case 7:
                 break;
@@ -111,13 +113,14 @@ public class AccountView {
             accountController.changeAccountInformation(chooseAccountId, name, dateOfBirth, phoneNumber);
         } else System.err.println("Doesn't exist id!");
     }
-    public void changeRole(){
+    public void changeRole() {
         System.out.println("Enter account id you wanna change:");
         int chooseAccountId = chooseAccount();
         if (chooseAccountId > -1) {
             System.out.println("Enter new role:");
-
-        }
-
+            int newRole = ValidateView.enterRole();
+            accountController.changeAccountRole(chooseAccountId,newRole);
+        } else System.err.println("Doesn't exist id!");
+    }
 
 }

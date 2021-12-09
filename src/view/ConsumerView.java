@@ -16,6 +16,4 @@ public class ConsumerView {
         return consumerController.createNewConsumer(consumerName, consumerDateOfBirth, consumerPhoneNumber);
     }
 
-
-
 }

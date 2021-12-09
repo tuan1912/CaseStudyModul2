@@ -35,7 +35,7 @@ public class ValidateView {
 
     public static int chooseChargeMenu() {
         int choiceNumber = enterIntegerNumber();
-        boolean isChoiceNumber = choiceNumber < 2 && choiceNumber > 0;
+        boolean isChoiceNumber = choiceNumber < 4 && choiceNumber > 0;
         if (isChoiceNumber) return choiceNumber;
         else {
             System.err.println("Wrong! Re-type your choice :");
@@ -43,7 +43,8 @@ public class ValidateView {
         }
     }
 
-    public static int chooseManageAccountsMenu() {
+
+    public  int chooseManageAccountsMenu() {
         int choiceNumber = enterIntegerNumber();
         boolean isChoiceNumber = choiceNumber < 7 && choiceNumber > 0;
         if (isChoiceNumber) return choiceNumber;

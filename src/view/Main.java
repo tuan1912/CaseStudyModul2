@@ -1,6 +1,8 @@
 package view;
 
+import controller.AccountController;
 import model.Account;
+import service.AccountServiceImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class Main {
     AccountView accountView = new AccountView();
     ComputerView computerView = new ComputerView();
     ConsumerView consumerView = new ConsumerView();
+    AccountController accountController = new AccountController();
     AdditionalServiceView additionalServiceView = new AdditionalServiceView();
 
     public void goAdministratorMenu() {
@@ -40,6 +43,7 @@ public class Main {
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 7:
+                computerView.goChargeMenu();
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 8:
@@ -56,6 +60,9 @@ public class Main {
     }
 
     private void exit() {
+        for (int i = 0; i < computerView.computerController.findAll().size(); i++) {
+            computerView.computerController.turnOff(i);
+        }
         System.exit(0);
     }
 
@@ -81,33 +88,46 @@ public class Main {
         System.out.println("               ---(^_^)---     ");
         String userName = ValidateView.loginUserName();
         String password = ValidateView.enterAccountPassword();
-        List<Account> accounts = accountView.accountController.findAll();
-        for (int i = 0; i < accounts.size(); i++) {
-            boolean isAccount = userName.equals(accounts.get(i).getUsername()) && password.equals(accounts.get(i).getPassword()) | userName.equals("nguyentuan") && password.equals("Tuan1992");
-            if (isAccount) {
-                boolean isAdministrator = accounts.get(i).getRole_BasedAuthorization() == 0;
-                if (isAdministrator | userName.equals("nguyentuan")) {
-                    System.out.println("                 Hi,Boss");
-                    System.out.println("              Welcome back!");
-                    System.out.println("               ---(^_^)---     ");
-                    new Main().goAdministratorMenu();
-                } else {
-                    boolean isManager = accounts.get(i).getRole_BasedAuthorization() == 1;
-                    if (isManager) {
-                        new Main().goManagerMenu();
-                    } else new Main().goConsumerMenu();
-                }
+        List<Account> accountList = AccountServiceImpl.accounts;
+        boolean isAccount = false;
+        int index = -1;
+        for (int i = 0; i < accountList.size(); i++) {
+            boolean isMatch = userName.equals(accountList.get(i).getUsername()) && password.equals(accountList.get(i).getPassword());
+            if ((isMatch)) {
+                isAccount = true;
+                index = i;
+                break;
+            }
+        }
+        if (!isAccount) {
+            if (userName.equals("nguyentuan") && password.equals("Tuan1992")) {
+                System.out.println("                 Hi,Boss");
+                System.out.println("              Welcome back!");
+                System.out.println("               ---(^_^)---     ");
+                new Main().goAdministratorMenu();
+            } else login();
+        } else {
+            boolean isAdministrator = accountList.get(index).getRole_BasedAuthorization() == 0;
+            if (isAdministrator) {
+                System.out.println("                 Hi,Boss");
+                System.out.println("              Welcome back!");
+                System.out.println("               ---(^_^)---     ");
+                new Main().goAdministratorMenu();
             } else {
-                System.err.println("Wrong!Re-type:");
-                login();
+                boolean isManager = accountList.get(index).getRole_BasedAuthorization() == 1;
+                if (isManager) {
+                    new Main().goManagerMenu();
+                } else new Main().goConsumerMenu();
             }
         }
     }
-    public void goManagerMenu(){
+
+    public void goManagerMenu() {
         System.out.println("Hihihihihihihihi");
     }
-    public void goConsumerMenu(){
-        System.out.println("               Come back a legend!");
+
+    public void goConsumerMenu() {
+        System.out.println("            Come back a legend!");
     }
 
     public static void main(String[] args) {

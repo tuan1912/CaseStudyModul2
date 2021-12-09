@@ -22,7 +22,12 @@ public class ComputerController {
     public void removeComputer(int index) {
         computerService.removeComputer(index);
     }
-
+    public void turnOff(int index){
+        computerService.turnOff(index);
+    }
+    public void isOnOrOff(int index) {
+        computerService.isOnOrOff(index);
+    }
 
 
 
