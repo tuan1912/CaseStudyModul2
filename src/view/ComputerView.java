@@ -69,18 +69,22 @@ public class ComputerView {
 
     public void goChargeMenu() {
         System.out.println("1. Turn On/Off Computer");
-        System.out.println("2. Check               ");
-        System.out.println("3. Go back Administrator Menu");
+        System.out.println("2. Surcharge           ");
+        System.out.println("3. Check               ");
+        System.out.println("4. Go back Administrator Menu");
         switch (chooseChargeMenu()) {
             case 1:
                 turnOnOrOff();
                 goChargeMenu();
                 break;
             case 2:
-                getCheck();
                 goChargeMenu();
                 break;
             case 3:
+                getCheck();
+                goChargeMenu();
+                break;
+            case 4:
                 break;
         }
     }
@@ -98,7 +102,7 @@ public class ComputerView {
 
     public int chooseChargeMenu() {
         int choiceNumber = enterIntegerNumber();
-        boolean isChoiceNumber = choiceNumber < 4 && choiceNumber > 0;
+        boolean isChoiceNumber = choiceNumber < 5 && choiceNumber > 0;
         if (isChoiceNumber) return choiceNumber;
         else {
             System.err.println("Wrong! Re-type your choice :");

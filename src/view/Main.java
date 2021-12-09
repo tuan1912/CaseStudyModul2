@@ -40,17 +40,14 @@ public class Main {
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 6:
-                ValidateView.goAdminMenuOrQuit();
-                break;
-            case 7:
                 computerView.goChargeMenu();
                 ValidateView.goAdminMenuOrQuit();
                 break;
-            case 8:
+            case 7:
                 accountView.goManageAccountMenu();
                 ValidateView.goAdminMenuOrQuit();
                 break;
-            case 9:
+            case 8:
                 ValidateView.goAdminMenuOrQuit();
                 break;
             case 0:
@@ -59,7 +56,7 @@ public class Main {
         }
     }
 
-    private void exit() {
+    public void exit() {
         for (int i = 0; i < computerView.computerController.findAll().size(); i++) {
             computerView.computerController.turnOff(i);
         }
@@ -73,10 +70,9 @@ public class Main {
         System.out.println("  3.  Change computer information       ");
         System.out.println("  4.  Remove computer                   ");
         System.out.println("  5.  Additional service                ");
-        System.out.println("  6.  Surcharge                         ");
-        System.out.println("  7.  Charge                            ");
-        System.out.println("  8.  Manage accounts                   ");
-        System.out.println("  9.  Show revenue                      ");
+        System.out.println("  6.  Charge                            ");
+        System.out.println("  7.  Manage accounts                   ");
+        System.out.println("  8.  Show revenue                      ");
         System.out.println("  0.  Exit                              ");
         System.out.println("              ---(^_^)---               ");
     }

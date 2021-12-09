@@ -19,13 +19,13 @@ public class ValidateView {
         if (!nextChoice.equalsIgnoreCase("quit")) {
             new Main().goAdministratorMenu();
         } else {
-            System.exit(0);
+            new Main().exit();
         }
     }
 
     public static int chooseAdminMenu() {
         int choiceNumber = enterIntegerNumber();
-        boolean isChoiceNumber = choiceNumber < 10 && choiceNumber >= 0;
+        boolean isChoiceNumber = choiceNumber < 9 && choiceNumber >= 0;
         if (isChoiceNumber) return choiceNumber;
         else {
             System.err.println("Wrong! Re-type your choice :");
@@ -46,7 +46,7 @@ public class ValidateView {
 
     public  int chooseManageAccountsMenu() {
         int choiceNumber = enterIntegerNumber();
-        boolean isChoiceNumber = choiceNumber < 7 && choiceNumber > 0;
+        boolean isChoiceNumber = choiceNumber < 8 && choiceNumber > 0;
         if (isChoiceNumber) return choiceNumber;
         else {
             System.err.println("Wrong! Re-type your choice ,again:");

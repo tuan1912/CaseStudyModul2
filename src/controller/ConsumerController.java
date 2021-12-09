@@ -7,7 +7,8 @@ import java.util.List;
 
 public class ConsumerController {
     ConsumerServiceImpl consumerService = new ConsumerServiceImpl();
-    public List<Consumer> findAll(){
+
+    public List<Consumer> findAll() {
         return consumerService.findAll();
     }
 
@@ -21,13 +22,12 @@ public class ConsumerController {
     }
 
     public void changeConsumerInformation(int index, String name, String dateOfBirth, String phoneNumber) {
-        consumerService.changeConsumerInformation(index,name,dateOfBirth,phoneNumber);
+        consumerService.changeConsumerInformation(index, name, dateOfBirth, phoneNumber);
     }
 
     public void removeConsumer(int index) {
         consumerService.removeConsumer(index);
     }
-
 
 
 }
